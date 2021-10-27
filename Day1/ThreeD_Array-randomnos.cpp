@@ -3,54 +3,64 @@ and then fill in a 3-dimensional array of size [8,9,11]
 with random positive numbers smaller than the one user has 
 provided – pretty print the array.*/
 
-#include <iostream>
-#include <random>
-
-const unsigned int index_i = 8, index_j = 9 , index_k = 11;
-
-void print2darray(unsigned int x[][index_k], unsigned int m)
-{
-    for (int i = 0; i < m; i++)
-    {
-        for(int j = 0; j < index_k; j++)
-        {
-            std::cout<< '\t' << x[i][j];
-        }
-        std::cout << std::endl;
-    }
-}
+#include "ThreeD_Array_randomnos.h"
 
 
-int main() 
-{
-    unsigned int input;
-    std::cout<<"Enter positive integer between 1 and 100" <<std::endl;
-    std::cin>> input;
-
-    unsigned int arr_3d[8][9][11];
+    
+    //unsigned int *ptr_arr_3d = &arr_3d[][][];
 
     //Define array with random integers
-    for(int k = 0; k < index_k; k++)
+    void inputArray(unsigned int (&array_3d)[index_i][index_j][index_k], unsigned int &input)
     {
-        for(int j = 0; j < index_j; j++)
-        {
-            for(int i =0; i < index_i; i++)
+        // random seed
+        srand (time(NULL));
+        
+    for(unsigned int k = 0; k < index_k; k++)
+        {   
+            for(unsigned int j = 0; j < index_j; j++)
             {
-            arr_3d[i][j][k] = rand() % input;
-            }
+                for(unsigned int i =0; i < index_i; i++)
+                {
+                array_3d[i][j][k] = rand() % input;
+                }
 
+            }
         }
     }
+
 
     //pretty print array
-    for(int i = 0; i < index_i; i++)
+    void prettyPrint(unsigned int (&array_3d)[index_i][index_j][index_k])
     {
-        std::cout << '[' << std:: endl;
-        print2darray(arr_3d[i], index_j);
-        if(i < index_i-1)
-        {
-            std::cout<< ",";
+
+        std::cout << "The array is: " << std:: endl;
+        for(unsigned int k = 0; k < index_k; k++)
+        {   
+            std::cout << '[' << std:: endl;
+            for(unsigned int i = 0; i < index_i; i++)
+         
+            {
+                for(unsigned int j = 0; j < index_j; j++)
+                {
+                    std::cout << array_3d[i][j][k];
+
+                    std::cout << '\t';
+                    if(j == (index_j - 1))
+                    {
+                    std::cout << '\n';
+                    }
+
+                }
+            
+            }
+            //{
+            /*print2darray(arr_3d[j], index_i);
+            if(k < index_i-k)
+            {
+                std::cout<< ",";
+            }*/
+            std::cout << std::endl;
+            std::cout << ']' << std:: endl;
         }
-        std::cout << std::endl;
     }
-}
+    
